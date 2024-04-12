@@ -1,0 +1,14 @@
+.creditsList {
+  margin-top: 20px;
+  list-style-type: disc;
+  padding: 0 40px;
+}
+
+.creditsList li:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.name {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
