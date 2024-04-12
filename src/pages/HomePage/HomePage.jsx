@@ -44,7 +44,7 @@ const HomePage = () => {
         <ul className={styles.moviesList}>
           {movies.map(({ id, title }) => (
             <li key={id}>
-              <Link to={`movies/${id}`} state={{ from: location.pathname }}>
+              <Link to={`movies/${id}`} state={location}>
                 {title}
               </Link>
             </li>

@@ -16,6 +16,7 @@ const movieInfoClassName = () => clsx(styles.movieInfo, styles.wrapper);
 const MovieDetailsPage = () => {
   const location = useLocation();
   const backLinkHref = useRef(location.state ?? '/');
+  console.log(backLinkHref.current);
 
   const [{ poster_path, original_title, release_date, overview, genres = [] }, setMovieDetails] =
     useState({});
