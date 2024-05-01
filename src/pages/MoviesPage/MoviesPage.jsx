@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import { fetchMoviesByName } from '../../api/tmdb-api';
 
 import Loader from '../../components/Loader';
 
+import MovieList from '../../components/MovieList/MovieList';
 import styles from './MoviesPage.module.css';
 
 const MoviesPage = () => {
-  const location = useLocation();
-
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('query') ?? '';
 
@@ -59,17 +58,7 @@ const MoviesPage = () => {
       </form>
       {status === 'pending' && <Loader />}
       {status === 'rejected' && <p>No movies were found :(</p>}
-      {status === 'success' && (
-        <ul className={styles.moviesList}>
-          {movies.map(({ id, original_title }) => (
-            <li key={id}>
-              <Link to={`${id}`} state={location}>
-                {original_title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {status === 'success' && <MovieList list={movies} />}
     </>
   );
 };

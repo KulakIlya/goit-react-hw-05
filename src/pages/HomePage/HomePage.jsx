@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 
 import Loader from '../../components/Loader';
 
 import { fetchTrendingMovies } from '../../api/tmdb-api';
 
+import MovieList from '../../components/MovieList/MovieList';
 import styles from './HomePage.module.css';
 
 const HomePage = () => {
-  const location = useLocation();
-
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('idle');
 
@@ -40,17 +38,7 @@ const HomePage = () => {
 
       {status === 'pending' && <Loader />}
       {status === 'rejected' && <p>Error: No movies was found :(</p>}
-      {status === 'success' && (
-        <ul className={styles.moviesList}>
-          {movies.map(({ id, title }) => (
-            <li key={id}>
-              <Link to={`movies/${id}`} state={location}>
-                {title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {status === 'success' && <MovieList list={movies} route="movies/" />}
     </>
   );
 };
